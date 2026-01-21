@@ -1,20 +1,15 @@
 package main
 
 import (
-	"errors"
 	"net/http"
-	"strconv"
 
 	"github.com/julienschmidt/httprouter"
 )
 
-func (app *application) readIDParam(r *http.Request) (int, error) {
+func (app *application) readNameParam(r *http.Request) (string, error) {
 	params := httprouter.ParamsFromContext(r.Context())
 
-	id, err := strconv.Atoi(params.ByName("id"))
-	if err != nil || id < 1 {
-		return 0, errors.New("invalid id parameter")
-	}
+	res := params.ByName("name")
 
-	return id, nil
+	return res, nil
 }
